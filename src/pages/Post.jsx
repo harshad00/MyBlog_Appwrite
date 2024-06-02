@@ -67,7 +67,7 @@ export default function Post() {
                     <h1 className="text-2xl font-bold ">{post.title}</h1>
                     <div className="w-[50%] h-[2px] bg-black m-1" ></div>
                 </div>
-                <div className=" border rounded-xl px-3 flex overflow-scroll">
+                <div className=" border rounded-xl px-3 flex">
                    
                     {parse(post.content)}
                 </div>
