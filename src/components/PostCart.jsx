@@ -3,18 +3,18 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import appwriteService from "../appwrit/confing";
-import appwriteService1 from "../appwrit/auth";
+// import appwriteService1 from "../appwrit/auth";
 
 function PostCart({ $id, title, featuredImage = "" }) {
-  const [user, setUser] = useState('');
+  // const [user, setUser] = useState('');
   // Check if featureImage is provided and generate the preview URL
   const imageUrl = featuredImage
     ? appwriteService.getFilePreview(featuredImage)
     : "";
 
-    appwriteService1.getCurrentUser().then((currentUser) => {
-      setUser(currentUser);
-    });
+    // appwriteService.getCurrentUser().then((currentUser) => {
+    //   setUser(currentUser);
+    // });
 
   return (
     <Link to={`/post/${$id}`}>
@@ -27,7 +27,7 @@ function PostCart({ $id, title, featuredImage = "" }) {
         )}
         <div className="flex flex-col">
         <h2 className="text-xl font-bold">{title}</h2> 
-        <p className=" text-sm px-1 font-semibold "> by {user.name} </p>
+        {/* <p className=" text-sm px-1 font-semibold "> by {user.name} </p> */}
         </div>
       </div> 
 
