@@ -11,9 +11,11 @@ function Login() {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const login = async (data) => {
     setError("");
+    setLoading(true);
 
     try {
       const session = await authService.login(data);
@@ -24,13 +26,14 @@ function Login() {
       }
     } catch (error) {
       setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
+
   return (
-    <div className="flex items-center justify-center w-full">
-      <div
-        className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
-      >
+    <div className="flex items-center justify-center w-full min-h-screen">
+      <div className="mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10">
         <div className="mb-2 flex justify-center">
           <span className="inline-block w-full max-w-[100px]">
             <Logo width="100%" />
@@ -58,7 +61,7 @@ function Login() {
               {...register("email", {
                 required: true,
                 validate: {
-                  matchPatern: (value) =>
+                  matchPattern: (value) =>
                     /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
                     "Email address must be a valid address",
                 },
@@ -73,7 +76,7 @@ function Login() {
               })}
             />
             <Button type="submit" className="w-full">
-              Sign in
+              {loading ? "Signing in..." : "Sign in"}
             </Button>
           </div>
         </form>
